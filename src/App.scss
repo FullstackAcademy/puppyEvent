@@ -3,17 +3,20 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: bisque;
 }
 
 form {
   display: flex;
   gap: 1ch;
+  justify-content: center;
 }
 
 aside {
   display: flex;
   flex-direction: column;
   gap: 1ch;
+  background-color: rgb(241, 245, 225);
 }
 
 main {
@@ -26,6 +29,7 @@ main {
 
 article {
   overflow-y: auto;
+  margin-top: 3%;
 }
 
 .puppies {

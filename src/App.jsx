@@ -7,6 +7,7 @@ import PuppyDetails from "./features/puppies/PuppyDetails";
 import PuppyList from "./features/puppies/PuppyList";
 import PuppyForm from "./features/puppies/PuppyForm";
 
+import './features/puppies/puppy.css';
 import "./App.scss";
 
 /**

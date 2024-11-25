@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAddPuppyMutation } from "./puppySlice";
+import { useGetPuppiesQuery } from "./puppySlice";
 
 /**
  * @component
@@ -10,17 +12,29 @@ export default function PuppyForm() {
 
   // TODO: Use the `addPuppy` mutation to add a puppy when the form is submitted
 
-  function postPuppy(event) {
-    event.preventDefault();
+  // Placeholder image w/ random photos of dogs
+  const imageUrl = "https://loremflickr.com/200/300/dog";
+  const { refetch } = useGetPuppiesQuery();
+  const [addPuppy, { isLoading, error }] = useAddPuppyMutation();
 
-    // Placeholder image w/ random photos of dogs
-    const imageUrl = "https://loremflickr.com/200/300/dog";
-  }
+  const postPlayer = async (event) => {
+    event.preventDefault();
+    const newPlayer = { name, breed, imageUrl };
+    try {
+      await addPuppy(newPlayer).unwrap();
+      refetch();
+      setName("");
+      setBreed("");
+    } catch (err) {
+      console.error("Puppy wasnt added...", err);
+    }
+  };
 
   return (
     <>
       <h2>Add a Puppy</h2>
-      <form onSubmit={postPuppy}>
+      <div className="formy">
+      <form onSubmit={postPlayer}>
         <label>
           Name
           <input
@@ -41,6 +55,7 @@ export default function PuppyForm() {
         {isLoading && <output>Uploading puppy information...</output>}
         {error && <output>{error.message}</output>}
       </form>
+      </div>
     </>
   );
 }
